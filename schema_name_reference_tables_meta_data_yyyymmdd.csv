@@ -1,0 +1,3 @@
+Bron;Tabelnaam;Veldnaam;Beschrijving;Type;Lengte;nullable;Uniek;Composite_Key;not_editable;valid_from;valid_to;validity_key
+schema_name;table_name;column_1;;STRING;;false;false;;false;;;
+schema_name;table_name;column_2;;INTEGER;;false;false;;false;;;
