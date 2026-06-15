@@ -1,0 +1,23 @@
+command: [
+  "streamlit", 
+  "run",
+  "app.py"
+]
+
+env:
+  - name: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+    value: "false"
+  - name: STREAMLIT_SERVER_HEADLESS
+    value: "true"
+  # Configure these per customer/environment in Databricks Apps or CI/CD.
+  # If CATALOG_NAME is omitted, the app uses {CATALOG_PREFIX}_{APP_ENV}.
+  - name: APP_NAME
+    value: "reference-data-app"
+  - name: APP_DISPLAY_NAME
+    value: "Reference Data Manager"
+  - name: APP_ENV
+    value: "dev"
+  - name: CATALOG_PREFIX
+    value: "reference_data"
+  - name: DEFAULT_SCHEMA
+    value: "default"

@@ -1,0 +1,171 @@
+[project]
+name = "data-layer-apps"
+version = "1.0.0"
+description = "Reference app"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "databricks-connect>=16.3.0,<16.4.0",  # Compatible with PySpark 3.5.2 and close to Runtime 16.4
+    "attrs>=25.3.0",
+    "fastjsonschema>=2.21.1",
+    "jsonschema>=4.25.0",
+    "jsonschema-specifications>=2025.4.1",
+    "nbformat>=5.10.4",
+    "referencing>=0.36.2",
+    "rpds-py>=0.27.0",
+    "pyspark==3.5.2",
+    "delta-spark>=3.2.0",
+    "databricks-dlt>=0.3.0",
+    "streamlit==1.38.0",
+    "ruff>=0.12.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ipykernel>=6.30.1",
+    "ipywidgets>=8.1.7",
+    "mdformat>=0.7.22",
+    "pre-commit>=4.2.0",
+    "yamlfix>=1.17.0",
+]
+
+test = [
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "pytest-cov>=6.2.1",
+    "pytest-mock>=3.14.1",
+    "pytest-sugar>=1.0.0",
+    "pytest-xdist>=3.8.0",
+]
+
+[tool.ruff]
+line-length = 80
+indent-width = 4
+respect-gitignore = true
+
+
+exclude = [
+    "*.interactive",
+    ".venv",
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    "__builtins__.pyi",
+]
+
+extend-include = [
+    "*.ipynb",
+]
+
+[tool.ruff.lint]
+preview = true
+
+extend-select = [
+    "ALL",
+]
+
+exclude = [
+    "typings",
+]
+
+ignore = [
+    "D",   # docstring rules
+    "TD",  # todo comments
+    "DOC", # pydoclint
+    "COM", # flake8-commas
+    "CPY", # flake8-copyright
+    "S608", # SQL injection through string-based query construction
+    "DTZ005", # timezone is not specified with datetime statements
+    "DTZ007", # timezone is not specified with datetime statements
+    "DTZ011", # timezone is not specified with datetime statements
+    "TRY301", 
+    "G004",  # Allow f strings in logging
+    "PLR0914", # Allow long functions
+    "FBT002", #  Allow positional parameters in functions 
+    "FBT001", #  Allow positional parameters in functions 
+    "PLR0913", # Allow long parameters
+    "PLR0917", # Allow long parameters
+    "PLR0912", # Allow long parameters
+    "PLR0915", # Allow long parameters
+    "SLF001", # Allow self._transport
+    "S507",  # Allow ssh_client.set_missing_host_key_policy(AutoAddPolicy())
+]
+
+extend-ignore = [
+    # Import-related
+    "E402",    # module level import not at top of file
+    "PLC0415", # imports should be at the top of the file
+    "F821",    # undefined name
+    "T201",    # Allow print statements
+    "INP001",  # Allow implicit namespace packages (needed otherwise __INIT_ files are created)
+
+    # Style-related
+    "E501", # line too long (handled by line-length)
+    "S101", # Use of assert detected
+
+    # Type annotation related
+    "PGH003", # type ignore should include reason
+    "PGH004", # type ignore should include reason
+
+    # Miscellaneous
+    "ERA001", # commented-out code
+    "BLE001", # Do not catch blind exception: `Exception`
+    "EM102",  # Exception must not use an f-string literal, assign to variable first
+    "RUF100", # Unused `noqa` directive
+    "UP006",  # use-pep585-annotation
+    "UP007",  # use-pep604-annotation
+    "E741",   # Ambiguous variable name
+    "RUF029", # Function is declared `async`, but doesn't `await` or use `async` features
+]
+
+fixable = [
+    "ALL", # allow autofix for all enabled rules
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401", # unused import
+    "F403", # star imports
+]
+
+"*.pyi" = [
+    "A001",
+    "A002",
+    "N",
+] # we don't control names in 3rd party modules
+
+"{tests,build}/**/*.py" = [
+    "S",    # none of these security focused rules are relevant for tests/build scripts
+    "T201",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 24
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+
+[tool.ruff.format]
+preview = true
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 80
+
+
+
+exclude = [
+    "typings",
+    "*/**/typings",
+]
+
+[tool.yamlfix]
+whitelines = 1
+section_whitelines = 1
+comment_whitelines = 1
+comments_min_spaces_from_content = 1
+indent = 2
+quote_representation = "'"
+explicit_start = false
